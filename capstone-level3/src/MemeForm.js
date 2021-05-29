@@ -31,7 +31,6 @@ class MemeForm extends Component {
     }
 
 
-
     handleSubmit(e) {
         e.preventDefault()
         const newMeme = {
@@ -105,4 +104,3 @@ class MemeForm extends Component {
     }
 }
 export default MemeForm
-
