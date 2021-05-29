@@ -18,9 +18,6 @@ class MemeForm extends Component {
     componentDidMount() {
         axios.get(`https://api.imgflip.com/get_memes`)
             .then((response) => {
-                console.log(response.data)
-                const memesApi = response.data
-                console.log(`GET MEMES LIST`, memesApi)
                 this.setState({
                     url: response.data.data.memes[0].url
                 })
