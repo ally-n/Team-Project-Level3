@@ -5,9 +5,10 @@ function RandomMeme(props) {
     console.log(props)
     return (
         <div>
-            <image>{props.url}</image>
+            <img width="250px" height="250px" src={props.url} alt="meme-photo" />
         </div>
     )
 }
 
 export default RandomMeme
+

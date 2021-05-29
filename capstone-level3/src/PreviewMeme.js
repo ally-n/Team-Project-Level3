@@ -5,9 +5,9 @@ function PreviewMeme(props) {
     console.log(props)
     return (
         <div>
-            <image>{props.url}</image>
+            <img width="250px" height="250px" src={props.url} alt="meme-photo" />
             <h3>{props.bottomText}</h3>
-            <button>Change Meme Image</button>        {/*NOTE:  maybe? needs to toggle between Change & Cancel Change Image?? */}
+            <button>Change Meme Image</button>
         </div>
     )
 }
