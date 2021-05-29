@@ -1,5 +1,5 @@
 import React from "react"
-import "./MemeForm"
+import MemeForm from "./MemeForm"
 import "./App.css"
 
 

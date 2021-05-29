@@ -1,11 +1,10 @@
 import React, { Component } from "react"
-// import "./RandomMeme.js"
-// import "./PreviewMeme.js"
-import "./MemeList"
+import RandomMeme from "./RandomMeme.js"
+import PreviewMeme from "./PreviewMeme.js"
 import "./MemeForm.css"
 import axios from "axios"
 
-class MemeForm extends { Component } {
+class MemeForm extends Component {
     constructor() {
         super()
         this.state = {
@@ -13,7 +12,7 @@ class MemeForm extends { Component } {
             url: "",
             topText: "",
             bottomText: "",
-            memeList: []
+            memeArray: []
         }
     }
     componentDidMount() {
@@ -21,7 +20,7 @@ class MemeForm extends { Component } {
             .then((response) => {
 
                 this.setState({
-                    url: response.data.data.memes[0].url    //NOTE:  kelly started to edit url response.data part of this--
+                    url: response.data.data.memes[0].url
                 })
             })
             .catch(error => console.log(error))
@@ -52,17 +51,24 @@ class MemeForm extends { Component } {
             [name]: value
         })
     }
+
+
+
     render() {
-        //this whole part could be done through props in a separate component instead- but what would memeList look like?
-        const memeList = this.state.memeArray.map((meme) => {
-            return <MemePreview
+
+        const memeList = this.state.memeArray.map((meme, index) =>
+            <PreviewMeme
+                key={meme.index}
+                id={index}
                 url={meme.url}
                 topText={meme.topText}
                 bottomText={meme.bottomText}
-            /> //Meme Preview component would have the edit and delete buttons? Cancel button
-        })
+            />
+        )
+
+
         return (
-            <div>        //does it make it random or do we need to randomize it?
+            <div>
                 <RandomMeme />
                 <form onSubmit={this.handleSubmit} id="memeForm">
                     <input onChange={this.handleChange}
@@ -80,9 +86,10 @@ class MemeForm extends { Component } {
                     <button onClick={this.handleSubmit}>Add Meme to List</button>
                 </form>
                 <PreviewMeme />
-                { memeList}      {/*I know this probably has to be different since it needs edit and delete buttons */}
+                { memeList}
             </div >
         )
     }
 }
 export default MemeForm
+
