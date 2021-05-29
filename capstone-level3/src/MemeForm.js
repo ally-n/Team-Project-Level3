@@ -1,6 +1,11 @@
 import React, { Component } from "react"
+<<<<<<< HEAD
 import RandomMeme from "./RandomMeme.js"
 import PreviewMeme from "./PreviewMeme.js"
+=======
+import PreviewMeme from "./PreviewMeme"
+import RandomMeme from "./RandomMeme"
+>>>>>>> 15907664f2dee0414d53e9015107938c84a06977
 import "./MemeForm.css"
 import axios from "axios"
 
@@ -18,7 +23,6 @@ class MemeForm extends Component {
     componentDidMount() {
         axios.get(`https://api.imgflip.com/get_memes`)
             .then((response) => {
-
                 this.setState({
                     url: response.data.data.memes[0].url
                 })
@@ -55,18 +59,27 @@ class MemeForm extends Component {
 
 
     render() {
+<<<<<<< HEAD
 
         const memeList = this.state.memeArray.map((meme, index) =>
             <PreviewMeme
                 key={meme.index}
                 id={index}
+=======
+        const memeList = this.state.memeArray.map((meme) => {
+            return <PreviewMeme
+>>>>>>> 15907664f2dee0414d53e9015107938c84a06977
                 url={meme.url}
                 topText={meme.topText}
                 bottomText={meme.bottomText}
             />
+<<<<<<< HEAD
         )
 
 
+=======
+        })
+>>>>>>> 15907664f2dee0414d53e9015107938c84a06977
         return (
             <div>
                 <RandomMeme />
