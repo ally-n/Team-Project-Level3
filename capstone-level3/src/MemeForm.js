@@ -8,8 +8,9 @@ class MemeForm extends Component {
     constructor() {
         super()
         this.state = {
-            id: "",
-            url: "",
+            memeId: "",
+            memeName: "",
+            memeURL: "",
             topText: "",
             bottomText: "",
             memeArray: []
@@ -21,10 +22,13 @@ class MemeForm extends Component {
         axios.get(`https://api.imgflip.com/get_memes`)
             .then((response) => {
                 console.log(response.data)
+                console.log(response.data.data.memes[0].url)
                 const memesAPI = response.data
                 console.log(`GET MEMES FROM API`, memesAPI)
                 this.setState({
-                    url: response.data.data.memes[0].url
+                    memeId: response.data.data.memes[0].id,
+                    memeName: response.data.data.memes[0].name,
+                    memeURL: response.data.data.memes[0].url
                 })
             })
             .catch(error => console.log(error))
@@ -34,12 +38,16 @@ class MemeForm extends Component {
     handleSubmit(e) {
         e.preventDefault()
         const newMeme = {
+            memeId: `${this.state.id}`,
             memeURL: `${this.state.url}`,
+            memeName: `${this.state.name}`,
             topText: `${this.state.topText}`,
             bottomText: `${this.state.bottomText}`
         }
         this.setState(prevState => ({
+            memeId: "",
             memeURL: "",
+            memeName: "",
             topText: "",
             bottomText: "",
             memeArray: [...prevState.memeArray, newMeme]
@@ -47,6 +55,8 @@ class MemeForm extends Component {
         ))
         document.getElementById("memeForm").reset()
     }
+
+
     handleChange(e) {
         e.preventDefault()
         const { name, value } = e.target
@@ -56,13 +66,12 @@ class MemeForm extends Component {
     }
 
 
-
     render() {
 
         const memeList = this.state.memeArray.map((meme, index) =>
             <PreviewMeme
-                key={meme.index}
-                id={index}
+                key={index}
+                id={meme.id}
                 url={meme.url}
                 topText={meme.topText}
                 bottomText={meme.bottomText}
