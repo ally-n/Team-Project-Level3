@@ -14,6 +14,8 @@ class MemeForm extends Component {
             bottomText: "",
             memeArray: []
         }
+        this.handleChange = this.handleChange.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this)
     }
     componentDidMount() {
         axios.get(`https://api.imgflip.com/get_memes`)
